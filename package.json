@@ -1,0 +1,19 @@
+{
+  "name": "lifeinfocus",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000L\u0000i\u0000f\u0000e\u0000I\u0000n\u0000F\u0000o\u0000c\u0000u\u0000s\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ampatte/LifeInFocus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ampatte/LifeInFocus/issues"
+  },
+  "homepage": "https://github.com/ampatte/LifeInFocus#readme"
+}
