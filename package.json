@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ampatte/LifeInFocus/issues"
   },
-  "homepage": "https://github.com/ampatte/LifeInFocus#readme"
+  "homepage": "https://github.com/ampatte/LifeInFocus#readme",
+  "dependencies": {
+    "react-router-dom": "^6.10.0"
+  }
 }
