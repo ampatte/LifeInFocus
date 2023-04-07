@@ -13,6 +13,19 @@ type JournalEntry = {
     text: String, 
     lastUpdated: String
 }
+
+type User {
+    id: ID
+    firstName: String
+    lastName: String
+    email: String
+}
+
+type Auth {
+    token: ID
+    user: User
+}
+
 `;
 
 module.exports = typeDefs;
