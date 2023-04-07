@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import Paper from "@mui/material/Paper";
 
 import JournalEntry from "../components/JournalEntry/JournalEntry";
 import LastEntry from "../components/LastEntry/LastEntry";
@@ -11,14 +12,29 @@ function Homepage() {
     <div className="home-container">
       <h1>We did it!</h1>
       <h2>More info!</h2>
-      
-      
-      <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid xs={6}> <JournalEntry/> </Grid>
-        <Grid xs={6}> <LastEntry/> </Grid>
-        <Grid xs={6}> <Rotating/></Grid>
-        <Grid xs={6}></Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <Grid container spacing={2} direction="column">
+            <Grid item xs={12}>
+              <Paper elevation={3} sx={{ padding: 2 }}>
+                <JournalEntry />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper elevation={3} sx={{ padding: 2 }}>
+                <Rotating />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper elevation={3} sx={{ padding: 2, height: '100%' }}>
+            <LastEntry />
+          </Paper>
+        </Grid>
       </Grid>
+
       <p>Even more</p>
 
       <NavLink className="button" to="entries">
