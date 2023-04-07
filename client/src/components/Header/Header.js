@@ -5,7 +5,7 @@ function Header() {
     return (
     <header className='header'>
     
-        I'm the head!
+        Journal
         
     </header>
     );
