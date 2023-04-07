@@ -8,21 +8,23 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: "center",
   color: theme.palette.text.secondary,
-  //height: 60,
+  //height: "100vh",
   lineHeight: "60px",
 }));
 
 function Rotating() {
   return (
     <Grid container spacing={2}>
-      <Item elevation={10}>
-        <h2>last journal entry</h2>
+    <Grid item xs={12} sm={12}>
+      <Paper elevation={10} sx={{ padding: 2 }}>
+        <h2>mememe of the Day</h2>
         <p>
           akjdajdwbkjdbjwd adwjkadb wad jadkjwdbahd ahd hawdba da dahdwhdkjba
           dakhbd
         </p>
-      </Item>
+      </Paper>
     </Grid>
+  </Grid>
   );
 }
 export default Rotating;

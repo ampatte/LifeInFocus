@@ -15,14 +15,19 @@ const Item = styled(Paper)(({ theme }) => ({
 function LastEntry() {
   return (
     <Grid container spacing={2}>
-      <Item elevation={10}>
-        <h2>last journal entry</h2>
-        <p>
-          akjdajdwbkjdbjwd adwjkadb wad jadkjwdbahd ahd hawdba da dahdwhdkjba
-          dakhbd
-        </p>
-      </Item>
-    </Grid>
+     <Grid item xs={12} sm={12}>
+          <Paper elevation={10} sx={{ padding: 20 }}>
+            <h2>Last journal entry</h2>
+            <p>kandajkdnajdakjdajjsandjdnsjandjsanjdjsnjandjsnjandjadnjdaj</p>
+            <Item
+              fullWidth
+              sx={{
+                minWidth: '80%',
+              }}
+            />
+          </Paper>
+        </Grid>
+      </Grid>
   );
 }
 export default LastEntry;
