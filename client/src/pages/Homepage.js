@@ -1,16 +1,30 @@
 import { NavLink } from "react-router-dom";
+import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+
+import JournalEntry from "../components/JournalEntry/JournalEntry";
+import LastEntry from "../components/LastEntry/LastEntry";
+import Rotating from "../components/Rotating/Rotating";
+
 
 function Homepage() {
   return (
     <div className="home-container">
-        <h1>We did it!</h1>
-        <h2>More info!</h2>
-         <p>Even more</p>
+      <h1>We did it!</h1>
+      <h2>More info!</h2>
       
-        <NavLink className="button" to="entries">
-          My projects
-        </NavLink>
-      </div>
+      
+      <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid xs={6}> <JournalEntry/> </Grid>
+        <Grid xs={6}> <LastEntry/> </Grid>
+        <Grid xs={6}> <Rotating/></Grid>
+        <Grid xs={6}></Grid>
+      </Grid>
+      <p>Even more</p>
+
+      <NavLink className="button" to="entries">
+        My projects
+      </NavLink>
+    </div>
   );
 }
 
