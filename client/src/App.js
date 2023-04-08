@@ -2,13 +2,10 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //import "./global-styles/global.css";
 import Homepage from "./pages/Homepage";
-
-
-
+import Page404 from "./pages/Page404";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
 
 function App() {
   return (
@@ -17,7 +14,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          {/* <Route path="*" element={<Page404 />} /> */}
+          <Route path="*" element={<Page404 />} />
         </Routes>
         <Footer />
       </Router>
