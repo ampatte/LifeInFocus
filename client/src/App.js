@@ -25,5 +25,8 @@ function App() {
     </div>
   );
 }
+// wrap in context, example module 21. in headers have to pass auth token, create login in route to login in user then grab token.
+// grab token from user query
+
 
 export default App;
