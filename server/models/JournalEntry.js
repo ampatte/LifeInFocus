@@ -5,18 +5,24 @@ const { timestamp } = require('rxjs');
 const journalSchema = new Schema({
     journalText: {
         type: String, 
-        required: 'Entry..',
-        minlength: 1,
-        maxlength: 280,
-        trim: true,
-    },
-
-    journalAuthor: {
-        type: String,
         required: true,
+        minlength: 1,
+        maxLength: 280,
         trim: true,
     },
+    
+    date: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+    },
 
+    lastUpdated: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+    },
+    
     createdAt: {
         type: Date,
         default: Date.now,

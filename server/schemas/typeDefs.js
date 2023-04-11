@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
 type Date {
@@ -10,16 +10,17 @@ type Date {
 type JournalEntry {
     id: ID,
     date: String,
-    text: String, 
-    lastUpdated: String
-    created
+    journalText: String, 
+    lastUpdated: String,
+    createdAt: String
 }
 
 type User {
     id: ID,
     firstName: String,
     lastName: String,
-    email: String
+    email: String,
+    journalEntries: [JournalEntry]
 }
 
 type Auth {
@@ -28,12 +29,22 @@ type Auth {
 }
 
 type Query {
-   getUsers: [User] 
+    getUsers: [User]
+    journalEntries: [JournalEntry],
+    journalEntry(id:ID!): JournalEntry,
+
 }
 
 type Mutation {
-    addJournalEntry(entryText: String, entryAuthor: ID)
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth, 
+
+    addJournalEntry(entryText: String!): JournalEntry,
+
+    updateJournalEntry(entryText: String!, lastUpdated: String!, journalID:ID!): JournalEntry,
+
 }
+  
+
 `;
 
 module.exports = typeDefs;
