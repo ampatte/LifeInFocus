@@ -1,6 +1,9 @@
+import useState from "react";
+import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -37,8 +40,14 @@ function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              </form>
-            
+              <Button type="submit" variant="contained" color="primary">
+                Sign In
+              </Button>
+            </form>
+            <p>
+              Don't have an account?{" "}
+              <NavLink to="/signup">Sign up here</NavLink>
+            </p>
           </Paper>
         </Grid>
       </Grid>
