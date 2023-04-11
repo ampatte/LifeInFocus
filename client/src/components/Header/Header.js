@@ -7,7 +7,7 @@ function Header() {
     <header className='header'>
         
         Journal
-        <Media/>
+        <Media className='player'/>
     </header>
     
     
