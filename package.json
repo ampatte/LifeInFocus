@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/ampatte/LifeInFocus#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.16",
     "react-router-dom": "^6.10.0"
   }
 }
