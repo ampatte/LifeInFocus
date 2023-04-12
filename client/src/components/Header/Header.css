@@ -4,5 +4,9 @@
     background-color: aquamarine;
     width: 100%;
     position: fixed;
+    opacity: 0.8;
+}
 
+.player {
+    float: right;
 }
