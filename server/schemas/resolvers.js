@@ -23,10 +23,10 @@ const resolvers = {
 			// 	};
 			// }
 
-			return await JournalEntry.find(params);
+			return await JournalEntry.find(params).populate('journalEntry');
 		},
 		journalEntry: async (parent, { id }) => {
-			return await JournalEntry.findById(id);
+			return await JournalEntry.findById(id).populate('journalEntry');
 		},
 		getUsers: async (parent) => {
 			return await User.find().populate("journalEntries");
@@ -70,6 +70,7 @@ const resolvers = {
 
 			throw new AuthenticationError("Not logged in");
 		},
+
 		updateJournalEntry: async (parent, args, context) => {
 			if (context.user) {
 				return await JournalEntry.findByIdAndUpdate(
@@ -85,14 +86,26 @@ const resolvers = {
 
 			throw new AuthenticationError("Not logged in");
 		},
-		// deleteJournalEntry: async (parent, args, context) => {
-		// 	console.log("checking context\n--------------");
-		// 	console.log(context.user);
-		// 	if (context.user) {
-		// 		console.log("deleted journal entry");
-		// 		const journalEntry = await JournalEntry.create({
-		// 			journalText: entryText,
-		// 		});
+
+		deleteJournalEntry: async (parent, {journalID}, context) => {
+			console.log("checking context\n--------------");
+			console.log(context.user);
+			if (context.user) {
+				const journalEntry = await JournalEntry.findOneAndDelete({
+					_id: journalID,
+					author: context.user.username,
+				  });
+				  await User.findOneAndUpdate(
+					{ _id: context.user._id },
+					{ $pull: { journalEntries: journalEntry._id } }
+				  );
+					console.log("deleted journal entry");
+				  return journalEntry;
+			}
+				
+				const journalEntry = await JournalEntry.create({
+					journalText: entryText,
+				});
 
 		// 		await User.findByIdAndUpdate(context.user.id, {
 		// 			$push: { journalEntries: journalEntry._id },
@@ -120,8 +133,8 @@ const resolvers = {
 			const token = signToken(user);
 
 			return { token, user };
-		},
-	},
-};
+		}
+	}
+},}
 
 module.exports = resolvers;

@@ -3,17 +3,17 @@ const bcrypt = require("bcrypt");
 const JournalEntry = require("./JournalEntry.js");
 
 const userSchema = new Schema({
-	firstName: {
+	username: {
 		type: String,
 		required: true,
 		trim: true,
 	},
 
-	lastName: {
-		type: String,
-		required: true,
-		trim: true,
-	},
+	// lastName: {
+	// 	type: String,
+	// 	required: true,
+	// 	trim: true,
+	// },
 
 	email: {
 		type: String,

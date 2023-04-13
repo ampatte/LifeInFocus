@@ -17,31 +17,31 @@ type JournalEntry {
 
 type User {
     id: ID,
-    firstName: String
-    lastName: String
+    userame: String
+    
     email: String
     journalEntries: [JournalEntry]
 }
 
 type Auth {
-    token: ID
+    token: ID!
     user: User
 }
 
 type Query {
     me: User
     getUsers: [User]
-    journalEntries: [JournalEntry]
+    User(username: String!): User
+    journalEntries(username: String!): [JournalEntry]
     journalEntry(id:ID!): JournalEntry
-
 }
 
 type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
 
-    addJournalEntry(entryText: String!): JournalEntry
+    addJournalEntry(journalText: String!): JournalEntry
 
-    updateJournalEntry(entryText: String!, lastUpdated: String!, journalID:ID!): JournalEntry
+    updateJournalEntry(journalText: String!, lastUpdated: String!, journalID:ID!): JournalEntry
 
     deleteJournalEntry(journalID:ID!): JournalEntry
 
