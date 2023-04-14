@@ -1,0 +1,14 @@
+h2 {
+    display:contents;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    grid-template-columns: repeat(auto-fill, 186px);
+    flex-direction: column;
+}

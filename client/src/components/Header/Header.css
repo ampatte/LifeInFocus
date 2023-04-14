@@ -1,18 +1,22 @@
 .header {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 50px;
     background-color: aquamarine;
     width: 100%;
-    position: fixed;
-    opacity: 0.8;
-}
+    position:-webkit-sticky;
+    opacity: 0.7;
+    padding: 1rem;
+    }
+
 
 .player {
     float: right;
 }
 
 .link {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size:large;
     padding-top: .5%;
     float: left;
-    font-size: 40%;
+    font-size: 50%;
 }

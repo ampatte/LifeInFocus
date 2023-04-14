@@ -15,5 +15,6 @@ code {
 #home {
   background-image: url(../src/components/Media/untitled.jpg);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size:cover;
+
 }

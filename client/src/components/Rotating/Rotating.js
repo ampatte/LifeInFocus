@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import quotes from "./Quotes";
 import { Box, Typography, Button, Paper, Grid, Container, styled } from "@mui/material";
+import "../../global-styles/global.css";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
