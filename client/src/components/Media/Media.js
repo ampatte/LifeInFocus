@@ -3,6 +3,7 @@ import fireflies from './music/fireflies.mp3';
 import piano from './music/fort-st-james.mp3';
 import meditation from './music/meditation.mp3';
 import { ButtonGroup, Button, Box } from '@mui/material';
+import "../../global-styles/global.css";
 
 
 function Media() {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './JournalEntry.css';
+import "../../global-styles/global.css";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import TextField from '@mui/material/TextField';
 import Paper from "@mui/material/Paper";
