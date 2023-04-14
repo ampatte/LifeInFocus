@@ -10,3 +10,9 @@
 .player {
     float: right;
 }
+
+.link {
+    padding-top: .5%;
+    float: left;
+    font-size: 40%;
+}

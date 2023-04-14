@@ -1,23 +1,38 @@
-// import { gql } from "@apollo/client";
+import { gql} from "@apollo/client";
 
-// export const QUERY_JOURNALENTRIES = gql`
-// 	query getEntries {
-// 		entries {
-// 			_id
-// 			entryText
-// 			entryAuthor
-// 			createdAt
-// 		}
-// 	}
-// `;
+export const QUERY_JOURNALENTRIES = gql`
+	query getjournalEntries {
+		journalEntries {
+			_id
+			journalEntryText
+			journalEntryAuthor
+			createdAt
+		}
+	}
+`;
 
-// export const QUERY_SINGLE_JOURNALENTRY = gql`
-// 	query getSingleEntry($entryId: ID!) {
-// 		entry(entryId: $entryId) {
-// 			_id
-// 			entryText
-// 			entryAuthor
-// 			createdAt
-// 		}
-// 	}
-// `;
+export const QUERY_SINGLE_JOURNALENTRY = gql`
+	query getSinglejournalEntry($journalID: ID!) {
+		journalEntry(journalID: $journalID) {
+			_id
+			journalEntryText
+			journalEntryAuthor
+			createdAt
+		}
+	}
+`;
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      journalEntry {
+        _id
+        journalEntryText
+        JournalEntryAuthor
+        createdAt
+      }
+    }
+  }
+`;

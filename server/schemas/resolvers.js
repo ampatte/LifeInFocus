@@ -4,7 +4,6 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
 	Query: {
-
 		journalEntries: async (parent, { createdAt, date, id }) => {
 			const params = {};
 
@@ -12,11 +11,11 @@ const resolvers = {
 				params.createdAt = createdAt;
 			}
 
-            if (date) {
-                params.date = {
-                    $regex: date,
-                };
-            }
+			if (date) {
+				params.date = {
+					$regex: date,
+				};
+			}
 
 			// if (id) {
 			// 	params.id = {
@@ -24,40 +23,26 @@ const resolvers = {
 			// 	};
 			// }
 
-			return await JournalEntry.find(params);
+			return await JournalEntry.find(params).populate('journalEntry');
 		},
 		journalEntry: async (parent, { id }) => {
-			return await JournalEntry.findById(id);
+			return await JournalEntry.findById(id).populate('journalEntry');
 		},
-        getUsers: async (parent) => {
-            return await User.find().populate('journalEntries');
-        },
-		// getUser: async (parent, args, context) => {
-		// 	if (context.user) {
-		// 		const user = await User.findById(context.user.id).populate({
-		// 			path: "journalEntries",
-		// 			populate: "date",
-		// 		});
+		getUsers: async (parent) => {
+			return await User.find().populate("journalEntries");
+		},
+		me: async (parent, args, context) => {
+			if (context.user) {
+				const user = await User.findOne({_id: context.user._id})
+				.select('-__v -password')
+				.populate('journalEntries')
+			
+			 return user;
 
-		// 		user.journalEntry.sort((a, b) => b.createdAt - a.createdAt);
+			}
 
-		// 		return user;
-		// 	}
-
-		// 	throw new AuthenticationError("Not logged in");
-		// },
-		// order: async (parent, { _id }, context) => {
-		//   if (context.user) {
-		//     const user = await User.findById(context.user._id).populate({
-		//       path: 'orders.products',
-		//       populate: 'category'
-		//     });
-
-		//     return user.orders.id(_id);
-		//   }
-
-		//   throw new AuthenticationError('Not logged in');
-		// },
+			throw new AuthenticationError("Not logged in");
+		},
 	},
 
 	Mutation: {
@@ -68,10 +53,13 @@ const resolvers = {
 			return { token, user };
 		},
 		addJournalEntry: async (parent, { entryText }, context) => {
-			// console.log(context);
+			console.log("checking context\n--------------");
+			console.log(context.user);
 			if (context.user) {
-                console.log('user exists');
-				const journalEntry = await JournalEntry.create({ journalText: entryText });
+				console.log("user exists");
+				const journalEntry = await JournalEntry.create({
+					journalText: entryText,
+				});
 
 				await User.findByIdAndUpdate(context.user.id, {
 					$push: { journalEntries: journalEntry._id },
@@ -82,38 +70,71 @@ const resolvers = {
 
 			throw new AuthenticationError("Not logged in");
 		},
+
 		updateJournalEntry: async (parent, args, context) => {
 			if (context.user) {
-				return await JournalEntry.findByIdAndUpdate(args.journalID, {
-                    entryText: args.entryText
-                }, 
-                {
-					new: true,
-				});
+				return await JournalEntry.findByIdAndUpdate(
+					args.journalID,
+					{
+						entryText: args.entryText,
+					},
+					{
+						new: true,
+					}
+				);
 			}
 
 			throw new AuthenticationError("Not logged in");
 		},
-        // deleteJournalEntry
 
-		// login: async (parent, { email, password }) => {
-		// 	const user = await User.findOne({ email });
+		deleteJournalEntry: async (parent, {journalID}, context) => {
+			console.log("checking context\n--------------");
+			console.log(context.user);
+			if (context.user) {
+				const journalEntry = await JournalEntry.findOneAndDelete({
+					_id: journalID,
+					author: context.user.username,
+				  });
+				  await User.findOneAndUpdate(
+					{ _id: context.user._id },
+					{ $pull: { journalEntries: journalEntry._id } }
+				  );
+					console.log("deleted journal entry");
+				  return journalEntry;
+			}
+				
+				const journalEntry = await JournalEntry.create({
+					journalText: entryText,
+				});
 
-		// 	if (!user) {
-		// 		throw new AuthenticationError("Incorrect credentials");
+		// 		await User.findByIdAndUpdate(context.user.id, {
+		// 			$push: { journalEntries: journalEntry._id },
+		// 		});
+
+		// 		return journalEntry;
 		// 	}
 
-		// 	const correctPw = await user.isCorrectPassword(password);
-
-		// 	if (!correctPw) {
-		// 		throw new AuthenticationError("Incorrect credentials");
-		// 	}
-
-		// 	const token = signToken(user);
-
-		// 	return { token, user };
+		// 	throw new AuthenticationError("Not logged in");
 		// },
-	},
-};
+
+		login: async (parent, { email, password }) => {
+			const user = await User.findOne({ email });
+
+			if (!user) {
+				throw new AuthenticationError("Incorrect credentials");
+			}
+
+			const correctPw = await user.isCorrectPassword(password);
+
+			if (!correctPw) {
+				throw new AuthenticationError("Incorrect credentials");
+			}
+
+			const token = signToken(user);
+
+			return { token, user };
+		}
+	}
+},}
 
 module.exports = resolvers;

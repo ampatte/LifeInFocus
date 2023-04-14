@@ -2,6 +2,7 @@ const { time } = require('console');
 const { Schema, model } = require('mongoose');
 const { timestamp } = require('rxjs');
 
+
 const journalSchema = new Schema({
     journalText: {
         type: String, 
@@ -14,19 +15,19 @@ const journalSchema = new Schema({
     date: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        get: (timestamp) => (timestamp),
     },
 
     lastUpdated: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        get: (timestamp) => (timestamp),
     },
     
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        get: (timestamp) => (timestamp),
     },
 })
 
