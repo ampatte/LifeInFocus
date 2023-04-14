@@ -9,6 +9,11 @@ const journalSchema = new Schema({
         maxLength: 280,
         trim: true,
     },
+
+    username: {
+        type: String, 
+        required: true,
+    },
     
     date: {
         type: Date,

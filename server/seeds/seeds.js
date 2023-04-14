@@ -23,12 +23,12 @@ db.once('open', async () => {
   await User.create({
     // firstName: 'Pamela',
     // lastName: 'Washington',
-    username: 'PamWash',
-    email: 'pamela@testmail.com',
+    username: 'GhostFace',
+    email: 'Ghostface@testmail.com',
     password: 'password12345',
-    orders: [
+    journalEntries: [
       {
-        products: [products[0].id, products[0].id, products[1].id]
+        journalEntries: [journalEntries[0].id, journalEntries[0].id, journalEntries[1].id]
       }
     ]
   });
