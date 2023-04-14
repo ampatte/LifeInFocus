@@ -1,7 +1,5 @@
 const { time } = require('console');
 const { Schema, model } = require('mongoose');
-const { timestamp } = require('rxjs');
-
 
 const journalSchema = new Schema({
     journalText: {
