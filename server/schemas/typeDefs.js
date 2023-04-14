@@ -8,7 +8,7 @@ type Date {
 }
 
 type JournalEntry {
-    id: ID,
+    id: ID
     date: String
     journalText: String
     lastUpdated: String
@@ -16,9 +16,8 @@ type JournalEntry {
 }
 
 type User {
-    id: ID,
-    userame: String
-    
+    id: ID
+    username: String
     email: String
     journalEntries: [JournalEntry]
 }

@@ -4,32 +4,30 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
 	Query: {
-		journalEntries: async (parent, { createdAt, date, id }) => {
+		journalEntries: async (parent, args) => {
 			const params = {};
 
-			if (createdAt) {
-				params.createdAt = createdAt;
+			if (args.createdAt) {
+				params.createdAt = args.createdAt;
 			}
 
-			if (date) {
+			if (args.date) {
 				params.date = {
 					$regex: date,
 				};
 			}
 
-			// if (id) {
-			// 	params.id = {
-			// 		$regex: id,
-			// 	};
-			// }
+			if (args.username) {
+				params.username = args.username;
+			}
 
-			return await JournalEntry.find(params).populate('journalEntry');
+			return await JournalEntry.find(params);
 		},
 		journalEntry: async (parent, { id }) => {
-			return await JournalEntry.findById(id).populate('journalEntry');
+			return await JournalEntry.findById(id);
 		},
 		getUsers: async (parent) => {
-			return await User.find().populate("journalEntries");
+			return await User.find().populate('journalEntries');
 		},
 		me: async (parent, args, context) => {
 			if (context.user) {
@@ -52,16 +50,17 @@ const resolvers = {
 
 			return { token, user };
 		},
-		addJournalEntry: async (parent, { entryText }, context) => {
+		addJournalEntry: async (parent, { journalText }, context) => {
 			console.log("checking context\n--------------");
 			console.log(context.user);
 			if (context.user) {
 				console.log("user exists");
 				const journalEntry = await JournalEntry.create({
-					journalText: entryText,
+					journalText: journalText,
+					username: context.user.username,
 				});
 
-				await User.findByIdAndUpdate(context.user.id, {
+				await User.findByIdAndUpdate(context.user._id, {
 					$push: { journalEntries: journalEntry._id },
 				});
 
@@ -76,7 +75,7 @@ const resolvers = {
 				return await JournalEntry.findByIdAndUpdate(
 					args.journalID,
 					{
-						entryText: args.entryText,
+						journalText: args.journalText,
 					},
 					{
 						new: true,
@@ -87,35 +86,23 @@ const resolvers = {
 			throw new AuthenticationError("Not logged in");
 		},
 
-		deleteJournalEntry: async (parent, {journalID}, context) => {
-			console.log("checking context\n--------------");
-			console.log(context.user);
+		deleteJournalEntry: async (parent, args, context) => {
 			if (context.user) {
-				const journalEntry = await JournalEntry.findOneAndDelete({
-					_id: journalID,
-					author: context.user.username,
-				  });
-				  await User.findOneAndUpdate(
-					{ _id: context.user._id },
-					{ $pull: { journalEntries: journalEntry._id } }
-				  );
-					console.log("deleted journal entry");
-				  return journalEntry;
+			  const deletedJournalEntry = await JournalEntry.deleteOne({
+				_id: args.journalEntryId,
+				userId: context.user.id
+			  });
+		  
+			  if (deletedJournalEntry.deletedCount === 1) {
+				return "Journal entry deleted successfully";
+			  } else {
+				throw new Error("Failed to delete journal entry");
+			  }
 			}
-				
-				const journalEntry = await JournalEntry.create({
-					journalText: entryText,
-				});
-
-		// 		await User.findByIdAndUpdate(context.user.id, {
-		// 			$push: { journalEntries: journalEntry._id },
-		// 		});
-
-		// 		return journalEntry;
-		// 	}
-
-		// 	throw new AuthenticationError("Not logged in");
-		// },
+		  
+			throw new AuthenticationError("Not logged in");
+		  },
+		  
 
 		login: async (parent, { email, password }) => {
 			const user = await User.findOne({ email });
@@ -135,6 +122,6 @@ const resolvers = {
 			return { token, user };
 		}
 	}
-},}
+}
 
 module.exports = resolvers;

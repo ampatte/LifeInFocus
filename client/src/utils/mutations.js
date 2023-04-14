@@ -1,27 +1,27 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password){
-        token
-        user{
-            _id
-            username
-            email
-            password
-        }
+mutation AddUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      user {
+        id
+        username
+        email
+      }
     }
-}`;
+  }
+`;
 
 export const ADD_JOURNALENTRY = gql`
-  mutation addJournalEntry($journaText: String!) {
-    addJournalEntry(journalText: $journalText, entryAuthor: $entryAuthor) {
-      _id
-      journalText
+mutation AddJournalEntry($journalText: String!, $journalId: ID!) {
+    addJournalEntry(journalText: $journalText) {
+      id
       date
-      lastUpdated
+      journalText
       createdAt
+      lastUpdated
     }
+  
   }
 `;
 
@@ -52,7 +52,6 @@ mutation login($email: String!, $password: String!) {
             _id
             username
             email
-            password
         }
     }
 }
