@@ -10,7 +10,7 @@ db.once('open', async () => {
       date: '04/06/2023',
       entry:
         'I am doing little things to help me be positive throughout the day',
-      category: journalEntries[0].id,
+      category: Object.id,
 
     },
 
@@ -26,9 +26,9 @@ db.once('open', async () => {
     username: 'PamWash',
     email: 'pamela@testmail.com',
     password: 'password12345',
-    orders: [
+    journalEntries: [
       {
-        products: [products[0].id, products[0].id, products[1].id]
+        journalEntries: [journalEntries[0].id, journalEntries[0].id, journalEntries[1].id]
       }
     ]
   });

@@ -20,7 +20,25 @@ const Item = styled(Paper)(({ theme }) => ({
     //height: 60,
     lineHeight: "60px",
   }));
-
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      await addJournalEntry({
+        variables: { journalText }
+      });
+      setJournalText("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+ 
+  
+  
+  
+  
+  
+  
 
     return (
         <Grid className="box" container spacing={2}>

@@ -12,7 +12,7 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
 }`;
 
 export const ADD_JOURNALENTRY = gql`
-  mutation addJournalEntry($journaText: String!) {
+  mutation addJournalEntry($journalText: String!) {
     addJournalEntry(journalText: $journalText, entryAuthor: $entryAuthor) {
       _id
       journalText
