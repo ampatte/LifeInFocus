@@ -1,19 +1,53 @@
-
-import { useState } from "react";
+//imports from react
 import { NavLink } from "react-router-dom";
-import Grid from "@mui/material/Grid";
+import { useState } from "react";
+
+import Auth from "../utils/auth"
+
+//imports from material ui
+import Grid from "@mui/material/Unstable_Grid2"; 
 import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+
+import { LOGIN } from "../utils/mutations";
+
+import {useMutation}  from '@apollo/client';
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [login, {error}] = useMutation(LOGIN);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+    
+    try{
+    const data = await login({
+      variables : { ...formState }
+    });
+
+      Auth.login(data.login.token);
+      } catch (e) {
+        console.error(e);
+    }
+
+    setFormState({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -29,8 +63,8 @@ function LoginPage() {
                 fullWidth
                 required
                 margin="normal"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formState.email}
+                onChange={handleChange}
               />
               <TextField
                 label="Password"
@@ -38,13 +72,14 @@ function LoginPage() {
                 fullWidth
                 required
                 margin="normal"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formState.password}
+                onChange={handleChange}
               />
               <Button type="submit" variant="contained" color="primary">
                 Sign In
               </Button>
             </form>
+            {error && <div>Login failed! Please try again.</div>}
             <p>
               Don't have an account?{" "}
               <NavLink to="/signup">Sign up here</NavLink>
