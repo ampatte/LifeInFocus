@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-mutation addUser(username: String!, email: String!, password: String!) {
+mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password){
         token
         user{
@@ -12,7 +12,7 @@ mutation addUser(username: String!, email: String!, password: String!) {
 }`;
 
 export const ADD_JOURNALENTRY = gql`
-  mutation addJournalEntry(journaText: String!) {
+  mutation addJournalEntry($journaText: String!) {
     addJournalEntry(journalText: $journalText, entryAuthor: $entryAuthor) {
       _id
       journalText
@@ -24,7 +24,7 @@ export const ADD_JOURNALENTRY = gql`
 `;
 
 export const UPDATE_JOURNALENTRY = gql` 
-mutation updateJournalEntry(journalText: String!, lastUpdated: String!, journalID: ID!)  {
+mutation updateJournalEntry($journalText: String!, $lastUpdated: String!, $journalID: ID!)  {
     updateJournalEntry(journalText: $journalText, lastUpdated: $lastUpdated, journalID: $journalID) {
     _id
     journalText
@@ -35,7 +35,7 @@ mutation updateJournalEntry(journalText: String!, lastUpdated: String!, journalI
 `;
 
 export const DELETE_JOURNALENTRY = gql`
-mutation deleteJournalEntry(journalID:ID!){
+mutation deleteJournalEntry($journalID:ID!){
     deleteJournalEntry(journalID: $journalID) {
         _id
     }
@@ -43,7 +43,7 @@ mutation deleteJournalEntry(journalID:ID!){
 `;
 
 export const LOGIN = gql`
-mutation login(email: String!, password: String!) {
+mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         token
         user{

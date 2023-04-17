@@ -6,10 +6,12 @@ import TextField from '@mui/material/TextField';
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-
+import  Button from "@mui/material/Button";
+import  ButtonGroup from "@mui/material/ButtonGroup";
 import { ADD_JOURNALENTRY } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
+function JournalEntry() {
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -19,19 +21,20 @@ const Item = styled(Paper)(({ theme }) => ({
     lineHeight: "60px",
   }));
 
-function JournalEntry() {
+
     return (
-        <Grid container spacing={2}>
-        <Grid item xs={12} sm={12}>
-          <Paper elevation={10} sx={{ padding: 2 }}>
-            <h2>Add an entry!</h2>
-            <TextField
-              fullWidth
-              sx={{
-                minWidth: '80%',
-              }}
-            />
-          </Paper>
+        <Grid className="box" container spacing={2}>
+        <Grid  item xs={12} sm={12}>
+            <Paper elevation={10} sx={{ padding: 2 }}>
+              <h2>Add an entry!</h2>
+              <TextField
+                fullWidth
+                sx={{
+                  minWidth: '80%',
+                }}
+              />
+            </Paper>
+          
         </Grid>
       </Grid>
     );

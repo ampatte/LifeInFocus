@@ -4,7 +4,7 @@ const secret = 'mysecretsshhhhh';
 const expiration = '5h';
 
 module.exports = {
-  authMiddleware: function ({ req }) {
+  authMiddleware: function ({ req }) {//function (req, res, next)
     // allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
@@ -23,11 +23,12 @@ module.exports = {
     } catch {
       console.log('Invalid token');
     }
+// send to next endpoint   next();
 
     return req;
   },
   signToken: function ({ username, email, _id }) {
-    const payload = { userame, email, _id };
+    const payload = { username, email, _id };
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
