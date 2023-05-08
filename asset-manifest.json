@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/LifeInFocus/static/css/main.e3c6d3bc.css",
+    "main.js": "/LifeInFocus/static/js/main.dc05f399.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/LifeInFocus/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/fireflies.mp3": "/LifeInFocus/static/media/fireflies.9fb5dfc0b3615d8fbe2c.mp3",
+    "static/media/meditation.mp3": "/LifeInFocus/static/media/meditation.57ec97f7562529a86c5d.mp3",
+    "static/media/fort-st-james.mp3": "/LifeInFocus/static/media/fort-st-james.d4dd15f904f687551333.mp3",
+    "static/media/untitled.jpg": "/LifeInFocus/static/media/untitled.b10a41a3f67644f91b63.jpg",
+    "index.html": "/LifeInFocus/index.html",
+    "main.e3c6d3bc.css.map": "/LifeInFocus/static/css/main.e3c6d3bc.css.map",
+    "main.dc05f399.js.map": "/LifeInFocus/static/js/main.dc05f399.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/LifeInFocus/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e3c6d3bc.css",
+    "static/js/main.dc05f399.js"
+  ]
+}
