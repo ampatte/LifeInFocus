@@ -31,7 +31,8 @@
     "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
-    "concurrently": "^8.0.1",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "concurrently": "^8.0.1"
+    
   }
 }
